@@ -1,0 +1,45 @@
+server:
+  port: 9073
+  servlet:
+    context-path: /senseguard-parking-management
+
+swagger:
+  enable: true
+
+spring:
+  application:
+    name: senseguard-parking-management
+  jackson:
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: true
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 800MB
+      max-request-size: 800MB
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+
+mybatis-plus:
+  mapper-locations: classpath*:mybatis/mapper/*.xml
+  global-config:
+    db-config:
+      id-type: AUTO
+      field-strategy: NOT_NULL
+      column-underline: true
+      logic-delete-value: -1
+      logic-not-delete-value: 0
+    banner: false
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+    call-setters-on-nulls: true
+    jdbc-type-for-null: 'null'
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
+
+logging:
+  config: classpath:logback-spring.xml
+  level:
+    root: info
+    com.sensetime.tsc.jwp.dao: debug
+    org.springframework.jdbc: DEBUG
